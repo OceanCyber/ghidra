@@ -142,6 +142,8 @@ public class PcodeOp {
 	private SequenceNumber seqnum;
 	private Varnode[] input;
 	private Varnode output;
+	private boolean boolean_flip;
+	private boolean fallthru_true;
 
 	/**
 	 * Constructor - pcode part of sequence of pcodes, some number of inputs, output
@@ -156,6 +158,8 @@ public class PcodeOp {
 		seqnum = sq;
 		input = new Varnode[numinputs];
 		output = out;
+		boolean_flip = false;
+		fallthru_true = false;
 	}
 
 	/**
@@ -171,6 +175,8 @@ public class PcodeOp {
 		seqnum = sq;
 		input = in;
 		output = out;
+		boolean_flip = false;
+		fallthru_true = false;
 	}
 
 	/**
@@ -187,6 +193,8 @@ public class PcodeOp {
 		seqnum = new SequenceNumber(a, sequencenumber);
 		input = in;
 		output = out;
+		boolean_flip = false;
+		fallthru_true = false;
 	}
 
 	/**
@@ -300,6 +308,14 @@ public class PcodeOp {
 	 */
 	public final boolean isCommutative() {
 		return isCommutative(opcode);
+	}
+
+	public final boolean isBooleanFlip() {
+		return boolean_flip;
+	}
+
+	public final boolean isFallthruTrue() {
+		return fallthru_true;
 	}
 
 	/**
@@ -475,6 +491,8 @@ public class PcodeOp {
 	public static PcodeOp decode(Decoder decoder, PcodeFactory pfact) throws DecoderException {
 		int el = decoder.openElement(ELEM_OP);
 		int opc = (int) decoder.readSignedInteger(ATTRIB_CODE);
+		boolean boolean_flip = decoder.readBool(ATTRIB_BOOLEAN_FLIP);
+		boolean fallthru_true = decoder.readBool(ATTRIB_FALLTHRU_TRUE);
 		SequenceNumber seqnum = SequenceNumber.decode(decoder);
 		Varnode output = Varnode.decode(decoder, pfact);
 		ArrayList<Varnode> inputlist = new ArrayList<>();
@@ -488,6 +506,8 @@ public class PcodeOp {
 		}
 		PcodeOp res = pfact.newOp(seqnum, opc, inputlist, output);
 		decoder.closeElement(el);
+		res.boolean_flip = boolean_flip;
+		res.fallthru_true = fallthru_true;
 		return res;
 	}
 
@@ -504,6 +524,9 @@ public class PcodeOp {
 			s = " --- ";
 		}
 		s += " " + getMnemonic() + " ";
+		if (isBooleanFlip() ^ isFallthruTrue()) {
+			s += "NOT ";
+		}
 		for (int i = 0; i < input.length; i++) {
 			if (input[i] == null) {
 				s += "null";

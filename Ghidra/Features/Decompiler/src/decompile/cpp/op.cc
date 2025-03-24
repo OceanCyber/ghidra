@@ -390,7 +390,11 @@ void PcodeOp::encode(Encoder &encoder) const
 
 {
   encoder.openElement(ELEM_OP);
-  encoder.writeSignedInteger(ATTRIB_CODE, (int4)code());
+  encoder.writeSignedInteger(ATTRIB_CODE, (int4)code());  
+
+  encoder.writeBool(ATTRIB_BOOLEAN_FLIP, isBooleanFlip());
+  encoder.writeBool(ATTRIB_FALLTHRU_TRUE, isFallthruTrue());
+
   start.encode(encoder);
   if (output==(Varnode *)0) {
     encoder.openElement(ELEM_VOID);

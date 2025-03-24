@@ -30,6 +30,8 @@ extern AttributeId ATTRIB_CODE;		///< Marshaling attribute "code"
 extern AttributeId ATTRIB_CONTAIN;	///< Marshaling attribute "contain"
 extern AttributeId ATTRIB_DEFAULTSPACE;	///< Marshaling attribute "defaultspace"
 extern AttributeId ATTRIB_UNIQBASE;	///< Marshaling attribute "uniqbase"
+extern AttributeId ATTRIB_BOOLEAN_FLIP;
+extern AttributeId ATTRIB_FALLTHRU_TRUE;
 
 extern ElementId ELEM_OP;		///< Marshaling element \<op>
 extern ElementId ELEM_SLEIGH;		///< Marshaling element \<sleigh>

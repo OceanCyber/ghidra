@@ -21,6 +21,8 @@ AttributeId ATTRIB_CODE = AttributeId("code",43);
 AttributeId ATTRIB_CONTAIN = AttributeId("contain",44);
 AttributeId ATTRIB_DEFAULTSPACE = AttributeId("defaultspace",45);
 AttributeId ATTRIB_UNIQBASE = AttributeId("uniqbase",46);
+AttributeId ATTRIB_BOOLEAN_FLIP = AttributeId("boolean_flip",53);
+AttributeId ATTRIB_FALLTHRU_TRUE = AttributeId("fallthru_true",54);
 
 ElementId ELEM_OP = ElementId("op",27);
 ElementId ELEM_SLEIGH = ElementId("sleigh",28);

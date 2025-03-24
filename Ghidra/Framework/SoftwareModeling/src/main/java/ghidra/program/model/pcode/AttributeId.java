@@ -108,6 +108,8 @@ public record AttributeId(String name, int id) {
 	public static final AttributeId ATTRIB_CONTAIN = new AttributeId("contain", 44);
 	public static final AttributeId ATTRIB_DEFAULTSPACE = new AttributeId("defaultspace", 45);
 	public static final AttributeId ATTRIB_UNIQBASE = new AttributeId("uniqbase", 46);
+	public static final AttributeId ATTRIB_BOOLEAN_FLIP = new AttributeId("boolean_flip", 53);
+	public static final AttributeId ATTRIB_FALLTHRU_TRUE = new AttributeId("fallthru_true", 54);
 
 	// type
 	public static final AttributeId ATTRIB_ALIGNMENT = new AttributeId("alignment", 47);
